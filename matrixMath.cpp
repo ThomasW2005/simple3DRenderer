@@ -38,6 +38,7 @@ void vec3d::normalize()
 bool mesh::LoadOBJ(std::string fileName)
 {
 	tri.clear();
+	tri.shrink_to_fit();
 	std::ifstream f(fileName);//, std::ios::in
 	if (f)
 	{

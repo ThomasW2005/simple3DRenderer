@@ -209,7 +209,7 @@ int main(int argc, char* argv[])
 		//After that, the triangles get sorted, so that the triangles which are nearest to the camera, will be drawn last, basic culling
 
 		std::vector<triangle> trianglesToRasterize;
-
+		
 		for (const auto& i : modelMesh.tri)
 		{
 			triangle triRotated, triProjected;
@@ -244,7 +244,7 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		std::sort(trianglesToRasterize.begin(), trianglesToRasterize.end(), [](triangle& t1, triangle& t2) // triangles get sorted using std::sort from <algorithm> (quicksort), lambda function to indiciate if two values should be swapped
+		std::ranges::sort(trianglesToRasterize.begin(), trianglesToRasterize.end(), [](triangle& t1, triangle& t2) // triangles get sorted using std::sort from <algorithm> (quicksort), lambda function to indiciate if two values should be swapped
 			{
 				float mid1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.0f;
 				float mid2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.0f;
@@ -328,6 +328,7 @@ int main(int argc, char* argv[])
 			for (int i = 0; i < textRight.size(); i++)
 				SDL_RenderDrawText(renderer, textRight[i], consola, textHeight / 2, i * textHeight - textHeight / 2 + (HEIGHT - textHeight * textRight.size()), 0, 255, 0);
 		}
+		
 		drawFPS(measuredFPS, consolaFat, renderer);
 
 		SDL_RenderPresent(renderer);
